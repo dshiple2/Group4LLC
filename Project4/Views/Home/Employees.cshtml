@@ -1,0 +1,43 @@
+﻿@{
+    ViewData["Title"] = "Employees";
+}
+
+@model List<Employee>
+
+<table class="table table-bordered">
+    <thead class="font-weight-bold">
+        <tr>
+            <td>First Name</td>
+            <td>Last Name</td>
+            <td>International</td>
+            <td>Gender</td>
+            <td>Email Address</td>
+            <td>Expected Hours</td>
+            <td>Semester</td>
+            <td>Year</td>
+            <td>Phone</td>
+            <td>BYU ID</td>
+            <td>Position</td>
+        </tr>
+
+    <tbody>
+        @foreach (var emp in Model)
+            {
+                <tr>
+                    <td>@emp.FirstName</td>
+                    <td>@emp.LastName</td>
+                    <td>@emp.International</td>
+                    <td>@emp.Gender</td>
+                    <td>@emp.EmailAddress</td>
+                    <td>@emp.ExpectedHours</td>
+                    <td>@emp.Semester</td>
+                    <td>@emp.Year</td>
+                    <td>@emp.Phone</td>
+                    <td>@emp.ByuId</td>
+                    <td>@emp.PositionType</td>
+                </tr>
+            }
+    </tbody>
+
+    </thead>
+</table>

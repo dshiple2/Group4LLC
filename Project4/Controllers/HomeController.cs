@@ -12,10 +12,12 @@ namespace Project4.Controllers
     public class HomeController : Controller
     {
         private readonly ILogger<HomeController> _logger;
+        private EmployeeDataContext dbContext { get; set; }
 
-        public HomeController(ILogger<HomeController> logger)
+        public HomeController(ILogger<HomeController> logger, EmployeeDataContext context)
         {
             _logger = logger;
+            dbContext = context;
         }
 
         public IActionResult Index()
@@ -23,9 +25,27 @@ namespace Project4.Controllers
             return View();
         }
 
-        public IActionResult Privacy()
+        [HttpGet]
+        public IActionResult EmployeeForm()
         {
+
             return View();
+        }
+
+        [HttpPost]
+        public IActionResult EmployeeForm(Employee employee)
+        {
+            dbContext.Add(employee);
+            dbContext.SaveChanges();
+
+            return View("Index");
+        }
+
+        [HttpGet]
+        public IActionResult Employees()
+        {
+            var employees = dbContext.employees.ToList();
+            return View(employees);
         }
 
         [ResponseCache(Duration = 0, Location = ResponseCacheLocation.None, NoStore = true)]
