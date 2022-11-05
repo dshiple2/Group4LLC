@@ -3,6 +3,21 @@
 }
 
 @model List<Employee>
+<div class="text-center">
+    <div style="background-image: url('../img/byu-students.jpg'); background-repeat: no-repeat; background-size: 100%;">
+        <br />
+        <h1 class="display-4 justify-content-md-center" style="margin: 100px; color: white;">IS Department Employees</h1>
+        <br />
+        <a class="btn btn-info" style="margin-bottom: 100px;" asp-area="" asp-controller="Home" asp-action="EmployeeForm"> Click Here to Add a New Employee</a>
+    </div>
+</div>
+
+<form asp-controller="Home" asp-action="Employees" method="get" style="padding: 15px;">
+    <p>
+        First Name: <input type="text" name="SearchString" />
+        <input type="submit" value="Filter" />
+    </p>
+</form>
 
 <table class="table table-bordered">
     <thead class="font-weight-bold dar" style="background-color: #002E5D">
@@ -22,21 +37,21 @@
 
     <tbody>
         @foreach (var emp in Model)
-            {
-                <tr>
-                    <td>@emp.FirstName</td>
-                    <td>@emp.LastName</td>
-                    <td>@emp.International</td>
-                    <td>@emp.Gender</td>
-                    <td>@emp.EmailAddress</td>
-                    <td>@emp.ExpectedHours</td>
-                    <td>@emp.Semester</td>
-                    <td>@emp.Year</td>
-                    <td>@emp.Phone</td>
-                    <td>@emp.ByuId</td>
-                    <td>@emp.PositionType</td>
-                </tr>
-            }
+        {
+            <tr>
+                <td>@emp.FirstName</td>
+                <td>@emp.LastName</td>
+                <td>@emp.International</td>
+                <td>@emp.Gender</td>
+                <td>@emp.EmailAddress</td>
+                <td>@emp.ExpectedHours</td>
+                <td>@emp.Semester</td>
+                <td>@emp.Year</td>
+                <td>@emp.Phone</td>
+                <td>@emp.ByuId</td>
+                <td>@emp.PositionType</td>
+            </tr>
+        }
     </tbody>
 
     </thead>
