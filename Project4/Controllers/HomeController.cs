@@ -116,7 +116,6 @@ namespace Project4.Controllers
                 return View(x);
             }
             
-            
         }
 
 
@@ -125,7 +124,6 @@ namespace Project4.Controllers
         {
             return "From [HttpPost]Employees: filter on " + searchString;
         }
-
 
         [ResponseCache(Duration = 0, Location = ResponseCacheLocation.None, NoStore = true)]
         public IActionResult Error()

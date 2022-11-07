@@ -10,7 +10,7 @@
         <br />
         <a class="btn btn-info" style="margin-bottom: 100px;" asp-area="" asp-controller="Home" asp-action="EmployeeForm"> Click Here to Add a New Employee</a>
     </div>
-</div>
+</div>  
 <div style="display: flex; padding-top: 10px">
     <form asp-controller="Home" asp-action="Employees" method="get" style="padding: 15px;">
         <p>
@@ -18,8 +18,7 @@
             <input type="submit" value="Filter" />
         </p>
     </form>
-
-<vc:types></vc:types>
+    <vc:types></vc:types>
 </div>
 
 <asp:Button Text="Export" OnClick="ExportCSV" runat="server" />
