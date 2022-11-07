@@ -42,11 +42,25 @@ namespace Project4.Controllers
         }
 
         [HttpGet]
-        public IActionResult Employees()
+        public IActionResult Employees(string searchString)
         {
             var employees = dbContext.employees.ToList();
-            return View(employees);
+            var searchEmp = from e in employees
+                            select e;
+            if (!String.IsNullOrEmpty(searchString))
+            {
+                searchEmp = searchEmp.Where(s => s.FirstName.Contains(searchString));
+            }
+            return View(searchEmp.ToList());
         }
+
+
+        [HttpPost]
+        public string Employees(string searchString, bool notUsed)
+        {
+            return "From [HttpPost]Employees: filter on " + searchString; 
+        }
+        
 
         [ResponseCache(Duration = 0, Location = ResponseCacheLocation.None, NoStore = true)]
         public IActionResult Error()
