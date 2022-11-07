@@ -65,6 +65,10 @@
 <body>
     <h1 style="text-align: center;">Student Employee Data</h1>
     <form id="studentData" method="post">
+        @if (Model != null)
+        {
+            <input type="hidden" asp-for="EmployeeId" />
+        }
         <div class="inputs">
             <label asp-for="FirstName">First Name:</label><br>
             <input asp-for="FirstName" id="fname" type="text"><br>

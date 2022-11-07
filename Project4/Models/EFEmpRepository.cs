@@ -12,5 +12,23 @@ namespace Project4.Models
         }
 
         public IQueryable<Employee> employees => _context.employees;
+
+        public void AddEmployee(Employee employee)
+        {
+            _context.Add(employee);
+            _context.SaveChanges();
+        }
+
+        public void EditEmployee(Employee employee)
+        {
+            _context.Update(employee);
+            _context.SaveChanges();
+        }
+
+        public void DeleteEmployee(Employee employee)
+        {
+            _context.Remove(employee);
+            _context.SaveChanges();
+        }
     }
 }

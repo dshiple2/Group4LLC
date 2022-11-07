@@ -20,8 +20,10 @@
             <td>Phone</td>
             <td>BYU ID</td>
             <td>Position</td>
+            <td></td>
+            <td></td>
         </tr>
-
+    </thead>
     <tbody>
         @foreach (Employee c in Model.employees)
             {
@@ -37,10 +39,12 @@
                     <td>@c.Phone</td>
                     <td>@c.ByuId</td>
                     <td>@c.PositionType</td>
+                    <td><a class="btn btn-primary" asp-controller="Home" asp-action="Edit" asp-route-employee="@c.EmployeeId">Edit</a></td>
+                    <td><a class="btn btn-primary" asp-controller="Home" asp-action="Delete" asp-route-employee="@c.EmployeeId">Delete</a></td>
                 </tr>
             }
     </tbody>
 
-    </thead>
+
 </table>
 <button onclick="download_table_as_csv();">Convert To CSV File</button>

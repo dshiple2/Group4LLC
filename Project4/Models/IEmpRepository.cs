@@ -9,5 +9,10 @@ namespace Project4.Models
     {
         IQueryable<Employee> employees { get; }
 
+        void AddEmployee(Employee employee);
+
+        void EditEmployee(Employee employee);
+
+        void DeleteEmployee(Employee employee);
     }
 }

@@ -47,8 +47,39 @@ namespace Project4.Controllers
         [HttpPost]
         public IActionResult EmployeeForm(Employee employee)
         {
-            //dbContext.Add(employee);
-            //dbContext.SaveChanges();
+            repo.AddEmployee(employee);
+
+            return View("Index");
+        }
+
+        [HttpGet]
+        public IActionResult Edit(int employee)
+        {
+            var editEmployee = repo.employees.Single(x => x.EmployeeId == employee);
+
+            return View("EmployeeForm", editEmployee);
+        }
+
+        [HttpPost]
+        public IActionResult Edit(Employee editEmployee)
+        {
+            repo.EditEmployee(editEmployee);
+
+            return View("Index");
+        }
+
+        [HttpGet]
+        public IActionResult Delete(int employee)
+        {
+            var delEmployee = repo.employees.Single(x => x.EmployeeId == employee);
+
+            return View(delEmployee);
+        }
+
+        [HttpPost]
+        public IActionResult Delete(Employee deleteEmployee)
+        {
+            repo.DeleteEmployee(deleteEmployee);
 
             return View("Index");
         }
