@@ -2,9 +2,11 @@
     ViewData["Title"] = "Employees";
 }
 
-@model List<Employee>
+@model  EmployeesViewModel
 
-<table class="table table-bordered">
+<asp:Button Text="Export" OnClick="ExportCSV" runat="server" />
+<vc:types></vc:types>
+<table class="table table-bordered" id="id1">
     <thead class="font-weight-bold dar" style="background-color: #002E5D">
         <tr style="color:white;">
             <td>First Name</td>
@@ -21,23 +23,24 @@
         </tr>
 
     <tbody>
-        @foreach (var emp in Model)
+        @foreach (Employee c in Model.employees)
             {
                 <tr>
-                    <td>@emp.FirstName</td>
-                    <td>@emp.LastName</td>
-                    <td>@emp.International</td>
-                    <td>@emp.Gender</td>
-                    <td>@emp.EmailAddress</td>
-                    <td>@emp.ExpectedHours</td>
-                    <td>@emp.Semester</td>
-                    <td>@emp.Year</td>
-                    <td>@emp.Phone</td>
-                    <td>@emp.ByuId</td>
-                    <td>@emp.PositionType</td>
+                    <td>@c.FirstName</td>
+                    <td>@c.LastName</td>
+                    <td>@c.International</td>
+                    <td>@c.Gender</td>
+                    <td>@c.EmailAddress</td>
+                    <td>@c.ExpectedHours</td>
+                    <td>@c.Semester</td>
+                    <td>@c.Year</td>
+                    <td>@c.Phone</td>
+                    <td>@c.ByuId</td>
+                    <td>@c.PositionType</td>
                 </tr>
             }
     </tbody>
 
     </thead>
 </table>
+<button onclick="download_table_as_csv();">Convert To CSV File</button>

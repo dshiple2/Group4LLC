@@ -10,6 +10,9 @@ using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
 using Project4.Models;
+using System.Data;
+using System.Configuration;
+using System.Data.SqlClient;
 
 namespace Project4
 {
@@ -31,6 +34,8 @@ namespace Project4
             {
                 options.UseSqlite(Configuration["ConnectionStrings:DbConnection"]);
             });
+
+            services.AddScoped<IEmpRepository, EFEmpRepository>();
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
