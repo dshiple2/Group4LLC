@@ -2,7 +2,7 @@
     ViewData["Title"] = "Employees";
 }
 
-@model List<Employee>
+@model  EmployeesViewModel
 <div class="text-center">
     <div style="background-image: url('../img/byu-students.jpg'); background-repeat: no-repeat; background-size: 100%;">
         <br />
@@ -10,16 +10,20 @@
         <br />
         <a class="btn btn-info" style="margin-bottom: 100px;" asp-area="" asp-controller="Home" asp-action="EmployeeForm"> Click Here to Add a New Employee</a>
     </div>
+</div>  
+<div style="display: flex; padding-top: 10px">
+    <form asp-controller="Home" asp-action="Employees" method="get" style="padding: 15px;">
+        <p>
+            First Name: <input type="text" name="SearchString" />
+            <input type="submit" value="Filter" />
+        </p>
+    </form>
+    <vc:types></vc:types>
 </div>
 
-<form asp-controller="Home" asp-action="Employees" method="get" style="padding: 15px;">
-    <p>
-        First Name: <input type="text" name="SearchString" />
-        <input type="submit" value="Filter" />
-    </p>
-</form>
+<asp:Button Text="Export" OnClick="ExportCSV" runat="server" />
 
-<table class="table table-bordered">
+<table class="table table-bordered" id="id1" style="table-layout: fixed; width:auto">
     <thead class="font-weight-bold dar" style="background-color: #002E5D">
         <tr style="color:white;">
             <td>First Name</td>
@@ -33,26 +37,32 @@
             <td>Phone</td>
             <td>BYU ID</td>
             <td>Position</td>
+            <td></td>
+            <td></td>
         </tr>
-
+    </thead>
     <tbody>
-        @foreach (var emp in Model)
-        {
-            <tr>
-                <td>@emp.FirstName</td>
-                <td>@emp.LastName</td>
-                <td>@emp.International</td>
-                <td>@emp.Gender</td>
-                <td>@emp.EmailAddress</td>
-                <td>@emp.ExpectedHours</td>
-                <td>@emp.Semester</td>
-                <td>@emp.Year</td>
-                <td>@emp.Phone</td>
-                <td>@emp.ByuId</td>
-                <td>@emp.PositionType</td>
-            </tr>
-        }
+
+        @foreach (Employee c in Model.employees)
+            {
+                <tr>
+                    <td>@c.FirstName</td>
+                    <td>@c.LastName</td>
+                    <td>@c.International</td>
+                    <td>@c.Gender</td>
+                    <td>@c.EmailAddress</td>
+                    <td>@c.ExpectedHours</td>
+                    <td>@c.Semester</td>
+                    <td>@c.Year</td>
+                    <td>@c.Phone</td>
+                    <td>@c.ByuId</td>
+                    <td>@c.PositionType</td>
+                    <td><a class="btn btn-primary" asp-controller="Home" asp-action="Edit" asp-route-employee="@c.EmployeeId">Edit</a></td>
+                    <td><a class="btn btn-primary" asp-controller="Home" asp-action="Delete" asp-route-employee="@c.EmployeeId">Delete</a></td>
+                </tr>
+            }
     </tbody>
 
-    </thead>
+
 </table>
+<button onclick="download_table_as_csv();">Convert To CSV File</button>
