@@ -49,7 +49,7 @@ namespace Project4.Controllers
         {
             repo.AddEmployee(employee);
 
-            return View("Index");
+            return RedirectToAction("Employees");
         }
 
         [HttpGet]
@@ -65,7 +65,7 @@ namespace Project4.Controllers
         {
             repo.EditEmployee(editEmployee);
 
-            return View("Index");
+            return RedirectToAction("Employees");
         }
 
         [HttpGet]
@@ -81,7 +81,7 @@ namespace Project4.Controllers
         {
             repo.DeleteEmployee(deleteEmployee);
 
-            return View("Index");
+            return RedirectToAction("Employees");
         }
 
         //[HttpGet]
@@ -91,16 +91,39 @@ namespace Project4.Controllers
         //    return View(employees);
         //}
         [HttpGet]
-        public IActionResult Employees(string positiontype)
+        public IActionResult Employees(string positiontype, string searchString)
         {
             StringBuilder QParam = new StringBuilder();
 
-            var x = new EmployeesViewModel
+            var employees = repo.employees;
+
+            if (!String.IsNullOrEmpty(searchString)) {
+                var x = new EmployeesViewModel
+                {
+                    employees = repo.employees
+                    .Where(x => x.PositionType == positiontype || positiontype == null)
+                    .Where(x => x.FirstName.Contains(searchString))
+                };
+                return View(x);
+            }
+            else
             {
-                employees = repo.employees
-                .Where(x => x.PositionType == positiontype || positiontype == null)
-            };
-            return View(x);
+                var x = new EmployeesViewModel
+                {
+                    employees = repo.employees
+                    .Where(x => x.PositionType == positiontype || positiontype == null)
+                };
+                return View(x);
+            }
+            
+            
+        }
+
+
+        [HttpPost]
+        public string Employees(string searchString, bool notUsed)
+        {
+            return "From [HttpPost]Employees: filter on " + searchString;
         }
 
 
